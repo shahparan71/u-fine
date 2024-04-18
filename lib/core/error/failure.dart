@@ -9,19 +9,23 @@ abstract class Failure {
 class ServerFailure extends Failure {
   ServerFailure(super.errorMessage);
 
-  factory ServerFailure.fromDioError(DioError dioError) {
+  factory ServerFailure.fromDioError(DioException dioError) {
+
+    print("object453 ${dioError.message}");
+    print("object453 6 ${dioError.type}");
+
     switch (dioError.type) {
-      case DioErrorType.connectionTimeout:
+      case DioExceptionType.connectionTimeout:
         return ServerFailure("Connection Timeout with the Server");
-      case DioErrorType.sendTimeout:
+      case DioExceptionType.sendTimeout:
         return ServerFailure("Sending Timeout with the Server");
-      case DioErrorType.receiveTimeout:
+      case DioExceptionType.receiveTimeout:
         return ServerFailure("Receiving Timeout with the Server");
-      case DioErrorType.badResponse:
+      case DioExceptionType.badResponse:
         return ServerFailure("Server Issue");
-      case DioErrorType.cancel:
+      case DioExceptionType.cancel:
         return ServerFailure('Request to ApiServer was canceled');
-      case DioErrorType.unknown:
+      case DioExceptionType.unknown:
         if (dioError.message!.contains('SocketException')) {
           return ServerFailure('No Internet Connection');
         }

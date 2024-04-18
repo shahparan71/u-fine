@@ -15,8 +15,11 @@ abstract class UrlBuilder {
   static const String API_KEY = "?api_key=15cc2d06189e5b776834afe0bdef40ba";
 
   static String buildUrl({required String endPoint}) =>
-      "$BASE_URL$endPoint$API_KEY";
+      "$BASE_URL$endPoint";
 
+  /*static String buildUrl({required String endPoint}) =>
+      "$BASE_URL$endPoint$API_KEY";
+*/
   static String buildAdvancedUrl(
           {required String movieId, required String endPoint}) =>
       "$BASE_URL$movieId$endPoint$API_KEY";

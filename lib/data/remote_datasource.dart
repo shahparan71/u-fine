@@ -6,14 +6,14 @@ import 'package:u_fine/core/error/failure.dart';
 import 'package:u_fine/core/util/constance.dart';
 import 'package:u_fine/data/models/user_models.dart';
 
-abstract class DataSourceRepositoryLoginRegistration {
-  Future<List<User>> getUserDetails();
-//Future<List<MovieModel>> getTopRatedMovies();
+abstract class DataSourceRepoLogReg {
+  Future<User> getUserDetails();
 }
 
-class LoginData extends DataSourceRepositoryLoginRegistration {
+class LoginData extends DataSourceRepoLogReg {
+
   @override
-  Future<List<User>> getUserDetails() async {
+  Future<User> getUserDetails() async {
     try {
       // Make HTTP GET request to fetch movie data
 
@@ -29,9 +29,13 @@ class LoginData extends DataSourceRepositoryLoginRegistration {
 
       // Check if response is successful
       if (response.statusCode == 200) {
-        // Parse JSON response into a list of MovieModel objects
-        final List<User> movies = List<User>.from(response.data.map((json) => User.fromJson(json)));
-        return movies;
+        print("object${response.data}");
+        //var jsonResponse = jsonDecode(response.data);
+        //print("jsonResponse${jsonResponse}");
+        return User.fromJson(response.data);
+
+        final User user1 = User.fromJson(response.data.map((json) => User.fromJson(json)));
+        return user1;
       } else {
         throw ServerFailure('Failed to fetch : ${response.statusMessage}');
       }

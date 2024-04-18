@@ -2,31 +2,41 @@ part of 'login_bloc.dart';
 
 final class LoginState extends Equatable {
   const LoginState({
-    this.username = '',
-    this.email = '',
-    this.language = 'en',
-    this.requestState = RequestState.loading,
+    required this.errorMessage,
+    required this.user,
+    required this.requestState,
   });
 
-  final String username;
-  final String email;
-  final String language;
+  final String errorMessage;
+  final User user;
   final RequestState requestState;
 
   LoginState copyWith({
-    String? username,
-    String? email,
-    String? language,
+    String? errorMessage,
+    User? user,
     RequestState? requestState,
   }) {
     return LoginState(
-      username: username ?? this.username,
-      email: email ?? this.email,
-      language: language ?? this.language,
+      errorMessage: errorMessage ?? this.errorMessage,
+      user: user ?? this.user,
       requestState: requestState ?? this.requestState,
     );
   }
 
   @override
-  List<Object> get props => [username, email,language, requestState];
+  List<Object> get props => [user, errorMessage, requestState];
+}
+
+class Restaurant {
+  final String id;
+  final String name;
+  List<String> servingList;
+  final User user;
+
+  Restaurant({
+    required this.id,
+    required this.name,
+    required this.user,
+    this.servingList = const [], // ERROR
+  });
 }

@@ -33,7 +33,9 @@ class _MyAppState extends State<MyApp> {
         create: (context) => getIt<LoginBloc>()..add(UserAlreadyLoggedIn()),
         child: BlocConsumer<LoginBloc, LoginState>(
           listener: (context, LoginState state) {
-            //print("dfdf${state.requestState}");
+            if (state.requestState == RequestState.error) {
+              print("object4344${state.errorMessage}");
+            }
           },
           builder: (context, state) {
             return MaterialApp(
@@ -42,7 +44,7 @@ class _MyAppState extends State<MyApp> {
               onGenerateRoute: Routerr.onGenerateRouter,
               localizationsDelegates: AppLocalizations.localizationsDelegates,
               supportedLocales: AppLocalizations.supportedLocales,
-              locale: Locale(state.language),
+              //locale: Locale(state.language),
             );
           },
         ));
@@ -71,7 +73,7 @@ class _MainPageState extends State<MainPage> {
               child: Center(
                   child: ElevatedButton(
                       onPressed: () {
-                        BlocProvider.of<LoginBloc>(context).add(LanguageChange('ja'));
+                        BlocProvider.of<LoginBloc>(context).add(LoginButtonClick());
                       },
                       child: Text(AppLocalizations.of(context)!.helloWorld))),
             ),

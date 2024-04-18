@@ -13,5 +13,6 @@ class LoginButtonClick extends LoginEvent {}
 
 class LanguageChange extends LoginEvent {
   final String lang;
+
   LanguageChange(this.lang);
 }

@@ -10,6 +10,7 @@ class User {
   ApiPacket? apiPacket;
   int? status;
 
+
   User({this.tag, this.success, this.serverRecordId, this.totalRecord, this.pageNo, this.pageSize, this.apiPacket, this.status});
 
   User.fromJson(Map<String, dynamic> json) {
