@@ -13,6 +13,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(const LoginState()) {
     on<UserAlreadyLoggedIn>(_userAlreadyLoggedIn);
     on<LoginButtonClick>(_loginButtonClick);
+    on<LanguageChange>(_LanguageChange);
   }
 
   Future<FutureOr<void>> _userAlreadyLoggedIn(UserAlreadyLoggedIn event, Emitter<LoginState> emit) async {
@@ -49,5 +50,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       ));
     } else
       emit(state.copyWith(email: "ABC", requestState: RequestState.loggedIn, username: "XYZ"));
+  }
+
+  FutureOr<void> _LanguageChange(LanguageChange event, Emitter<LoginState> emit) {
+    emit(state.copyWith(language: event.lang));
   }
 }

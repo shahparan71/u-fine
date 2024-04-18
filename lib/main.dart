@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:u_fine/core/services/service_locator.dart';
 import 'package:u_fine/core/util/enums.dart';
 import 'package:u_fine/core/util/shared_preferences.dart';
@@ -7,6 +8,7 @@ import 'package:u_fine/router/routerr.dart';
 
 import 'presentation/login/bloc/login_bloc.dart';
 import 'presentation/login/view/splash_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,6 +40,9 @@ class _MyAppState extends State<MyApp> {
               debugShowCheckedModeBanner: false,
               home: MainPage(state),
               onGenerateRoute: Routerr.onGenerateRouter,
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
+              locale: Locale(state.language),
             );
           },
         ));
@@ -66,9 +71,9 @@ class _MainPageState extends State<MainPage> {
               child: Center(
                   child: ElevatedButton(
                       onPressed: () {
-                        BlocProvider.of<LoginBloc>(context).add(LoginButtonClick());
+                        BlocProvider.of<LoginBloc>(context).add(LanguageChange('ja'));
                       },
-                      child: Text("Log"))),
+                      child: Text(AppLocalizations.of(context)!.helloWorld))),
             ),
     ));
   }
